@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Siméon Rescoussier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Mise en page : colonne unique centrée, en-tête sobre, sections séparées par un filet fin. */
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --fg: #17202b;
+    --muted: #5b6776;
+    --line: #dde3ea;
+    --accent: #1f5fbf;
+    --accent-soft: #e6eefb;
+    --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f151c;
+      --surface: #161e28;
+      --fg: #e8edf3;
+      --muted: #9aa6b4;
+      --line: #263140;
+      --accent: #6ea2f0;
+      --accent-soft: #1a2a42;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f151c;
+    --surface: #161e28;
+    --fg: #e8edf3;
+    --muted: #9aa6b4;
+    --line: #263140;
+    --accent: #6ea2f0;
+    --accent-soft: #1a2a42;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    padding-block: 0 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  nav {
+    display: flex; flex-wrap: wrap; gap: 8px 24px;
+    padding-block: 20px;
+    font-size: 14px; font-weight: 500;
+  }
+  nav a { color: var(--muted); text-decoration: none; }
+  nav a:hover { color: var(--accent); }
+
+  header { padding-block: 56px 48px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin: 0 0 12px;
+  }
+  h1 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(2.4rem, 8vw, 3.8rem); line-height: 1.05;
+    letter-spacing: -0.02em; margin: 0 0 20px; text-wrap: balance;
+  }
+  .lead { font-size: 1.125rem; color: var(--muted); max-width: 56ch; margin: 0 0 28px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-block; padding: 10px 18px; border-radius: 6px;
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    border: 1px solid var(--accent);
+  }
+  .btn.primary { background: var(--accent); color: var(--bg); }
+  .btn.ghost { color: var(--accent); background: transparent; }
+
+  section { padding-block: 48px; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  h2 {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: 1.6rem; letter-spacing: -0.01em; margin: 0 0 24px;
+  }
+  p { margin: 0 0 16px; max-width: 65ch; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; list-style: none; }
+  .tags li {
+    background: var(--accent-soft); color: var(--accent);
+    padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 500;
+  }
+  .skills { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .skills h3 { font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; font-weight: 600; }
+
+  .projects { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .project {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 8px; padding: 20px; min-width: 0;
+  }
+  .project h3 { font-family: var(--font-display); font-size: 1.15rem; margin: 0 0 6px; }
+  .project p { color: var(--muted); font-size: 15px; margin: 0 0 14px; }
+  .project .tags li { font-size: 12px; padding: 2px 10px; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+  .timeline li { display: grid; grid-template-columns: 120px 1fr; gap: 16px; }
+  .timeline time { color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; padding-top: 2px; }
+  .timeline strong { display: block; font-weight: 600; }
+  .timeline span { color: var(--muted); font-size: 15px; }
+  @media (max-width: 520px) { .timeline li { grid-template-columns: 1fr; gap: 2px; } }
+
+  .contact-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .contact-list b { display: inline-block; min-width: 96px; color: var(--muted); font-weight: 500; }
+  .contact-list span, .contact-list a { overflow-wrap: anywhere; }
+
+  footer { padding-top: 24px; color: var(--muted); font-size: 14px; }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Navigation principale">
+    <a href="#apropos">À propos</a>
+    <a href="#competences">Compétences</a>
+    <a href="#projets">Projets</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header>
+    <p class="eyebrow">Portfolio</p>
+    <h1>Siméon Rescoussier</h1>
+    <p class="lead">[Votre statut, par exemple : étudiant en informatique] à la recherche d'un stage ou d'une alternance. Voici mes projets et mon parcours.</p>
+    <div class="cta">
+      <a class="btn primary" href="#projets">Voir mes projets</a>
+      <a class="btn ghost" href="#contact">Me contacter</a>
+    </div>
+  </header>
+
+  <section id="apropos">
+    <h2>À propos</h2>
+    <p>Je m'appelle Siméon et je suis [formation ou métier] à [ville ou établissement]. Je m'intéresse à [domaine 1] et à [domaine 2].</p>
+    <p>Je cherche [stage, alternance, premier emploi] à partir de [date]. J'aime les projets concrets où l'on apprend en faisant.</p>
+  </section>
+
+  <section id="competences">
+    <h2>Compétences</h2>
+    <div class="skills">
+      <div>
+        <h3>Techniques</h3>
+        <ul class="tags"><li>Compétence 1</li><li>Compétence 2</li><li>Compétence 3</li></ul>
+      </div>
+      <div>
+        <h3>Outils</h3>
+        <ul class="tags"><li>Outil 1</li><li>Outil 2</li><li>Outil 3</li></ul>
+      </div>
+      <div>
+        <h3>Langues</h3>
+        <ul class="tags"><li>Français, langue maternelle</li><li>Anglais, [niveau]</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets">
+    <h2>Projets</h2>
+    <div class="projects">
+      <article class="project">
+        <h3>Titre du projet 1</h3>
+        <p>En deux phrases : le but du projet, ce que vous avez fait et le résultat obtenu.</p>
+        <ul class="tags"><li>Techno A</li><li>Techno B</li></ul>
+      </article>
+      <article class="project">
+        <h3>Titre du projet 2</h3>
+        <p>En deux phrases : le contexte (cours, projet personnel, association) et votre rôle.</p>
+        <ul class="tags"><li>Techno C</li><li>Techno D</li></ul>
+      </article>
+      <article class="project">
+        <h3>Titre du projet 3</h3>
+        <p>En deux phrases : le problème de départ et la solution que vous avez construite.</p>
+        <ul class="tags"><li>Techno E</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="parcours">
+    <h2>Parcours</h2>
+    <ul class="timeline">
+      <li>
+        <time>[Année – Année]</time>
+        <div><strong>[Formation ou diplôme en cours]</strong><span>[Établissement, ville]</span></div>
+      </li>
+      <li>
+        <time>[Année]</time>
+        <div><strong>[Stage ou emploi]</strong><span>[Entreprise, missions principales]</span></div>
+      </li>
+      <li>
+        <time>[Année]</time>
+        <div><strong>[Baccalauréat ou diplôme précédent]</strong><span>[Lycée, spécialités]</span></div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Une question, une proposition ? Écrivez-moi.</p>
+    <ul class="contact-list">
+      <li><b>E-mail</b><span>[prenom.nom@exemple.fr]</span></li>
+      <li><b>LinkedIn</b><span>[lien vers votre profil]</span></li>
+      <li><b>GitHub</b><span>[lien vers votre profil]</span></li>
+    </ul>
+  </section>
+
+  <footer>© 2026 Siméon Rescoussier</footer>
+</div>
+</body>
+</html>
